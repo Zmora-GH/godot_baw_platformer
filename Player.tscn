@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://img/ch3beta.png" type="Texture" id=1]
+[ext_resource path="res://Body.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.18402
+height = 6.7651
+
+[node name="Player" type="Node2D"]
+
+[node name="Body" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2( -0.129848, -4.6815 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Body"]
+position = Vector2( -0.176777, -10.2699 )
+texture = ExtResource( 1 )
+hframes = 15
+frame = 1
+
+[node name="Camera2D" type="Camera2D" parent="Body"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
