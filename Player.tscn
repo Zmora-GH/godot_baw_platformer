@@ -1,11 +1,59 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://img/ch3beta.png" type="Texture" id=1]
+[ext_resource path="res://player/ch3.png" type="Texture" id=1]
 [ext_resource path="res://Body.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 4.18402
-height = 6.7651
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 4.47567
+height = 6.10287
+
+[sub_resource type="Animation" id=2]
+resource_name = "Run"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.606529, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 2, 3, 4, 5, 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fall"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0652887 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 9 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0739939 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
 
 [node name="Player" type="Node2D"]
 
@@ -13,16 +61,23 @@ height = 6.7651
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-position = Vector2( -0.129848, -4.6815 )
-shape = SubResource( 1 )
+position = Vector2( -0.0634074, -4.58251 )
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Body"]
-position = Vector2( -0.176777, -10.2699 )
+position = Vector2( 0, -10.2453 )
 texture = ExtResource( 1 )
-hframes = 15
+hframes = 10
 frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body"]
+anims/Run = SubResource( 2 )
+anims/fall = SubResource( 3 )
+anims/idle = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="Body"]
 current = true
+process_mode = 0
+limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 8.0

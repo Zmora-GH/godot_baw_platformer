@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ch3beta.png-801c47b5568fa2b22d01175327ece0d4.stex"
+path="res://.import/blackwhile-ts.png-8ad08ea122a870d353478220e4d637f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/ch3beta.png"
-dest_files=[ "res://.import/ch3beta.png-801c47b5568fa2b22d01175327ece0d4.stex" ]
+source_file="res://world/blackwhile-ts.png"
+dest_files=[ "res://.import/blackwhile-ts.png-8ad08ea122a870d353478220e4d637f9.stex" ]
 
 [params]
 

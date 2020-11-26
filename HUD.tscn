@@ -1,0 +1,30 @@
+[gd_scene format=2]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 10.0406
+margin_top = 8.16307
+margin_right = 50.0406
+margin_bottom = 22.1631
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "TEXT"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="TextEdit" parent="."]
+margin_left = 57.0811
+margin_top = 5.62159
+margin_right = 140.081
+margin_bottom = 22.6216
+text = "TEXT2"
+readonly = true
+highlight_current_line = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

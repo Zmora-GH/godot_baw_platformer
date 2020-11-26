@@ -1,28 +1,41 @@
 extends KinematicBody2D
 
-const ACC = 350
-const SPD_MULTI = 1
-const FRIC = 350
-const MAX_SPEED = 125
-const GRAV = 10
-const JUMP_POWER = 275
+const SOME_VALUE = Vector2(0, -1)
+const SPEEDX = 20
+const MAX_SPEED = 100
+const YPOWER = 220
+const YGRAV = 10
 
-var V = Vector2.ZERO
+onready var ap = $AnimationPlayer
+var motion = Vector2()
 
+var runing = false
 
 func movement(d):
-	var IV = Vector2.ZERO
-	IV.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	motion.y += YGRAV
 	
-	IV = IV.normalized()
-	if IV != Vector2.ZERO:
-		V = V.move_toward(IV * MAX_SPEED, ACC * d)
-	else: 
-		V = V.move_toward(Vector2.ZERO, FRIC * d)
-	V = move_and_slide(SPD_MULTI * V)
+	if Input.is_action_pressed('ui_right'):
+		motion.x += SPEEDX
+		runing = true
+		$Sprite.flip_h = false
+		motion.x = min(motion.x, MAX_SPEED)
+	elif Input.is_action_pressed('ui_left'):
+		$Sprite.flip_h = true
+		runing = true
+		motion.x -= SPEEDX
+		motion.x = max(motion.x, -MAX_SPEED)
+	else:
+		motion.x = 0
+		runing = false
+	
+	if is_on_floor():
+		ap.play("idle") if not runing else ap.play("Run")
+		if Input.is_action_pressed('ui_jump'):
+			motion.y -= YPOWER
+	else:
+		 ap.play("fall")
 
-func _process(delta):
-	if Input.is_action_just_pressed("ui_jump") and is_on_floor():
-		V.y -= JUMP_POWER
+	motion = move_and_slide(motion, SOME_VALUE)
+
+func _physics_process(delta):
 	movement(delta)
-	V.y += GRAV
